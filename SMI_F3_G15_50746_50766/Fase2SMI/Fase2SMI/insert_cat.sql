@@ -1,0 +1,22 @@
+-- Inserir categorias na tabela Category
+INSERT INTO Category (name, description) VALUES
+('História', 'Artigos sobre eventos históricos e períodos importantes'),
+('Ciência', 'Conhecimento científico e descobertas tecnológicas'),
+('Tecnologia', 'Inovações tecnológicas e desenvolvimentos digitais'),
+('TV', 'Programas de televisão, séries e entretenimento'),
+('Cinema', 'Filmes, realizadores e indústria cinematográfica'),
+('Jogos', 'Videojogos, board games e jogos digitais'),
+('Arte', 'Expressões artísticas, movimentos e artistas'),
+('Música', 'Géneros musicais, artistas e teoria musical'),
+('Programação', 'Linguagens de programação e desenvolvimento de software'),
+('Design', 'Design gráfico, UI/UX e princípios de design'),
+('Redes', 'Redes de computadores e comunicação digital'),
+('Multimédia', 'Tecnologias e aplicações multimédia'),
+('Internet', 'História e evolução da world wide web'),
+('Segurança', 'Cibersegurança e proteção de dados'),
+('IA', 'Inteligência Artificial e machine learning'),
+('Mobile', 'Tecnologias e aplicações móveis'),
+('Realidade Virtual', 'VR, AR e tecnologias imersivas'),
+('Streaming', 'Plataformas e tecnologias de streaming'),
+('Fotografia', 'Técnicas, equipamento e história da fotografia'),
+('Animação', 'Técnicas de animação 2D/3D e motion graphics');

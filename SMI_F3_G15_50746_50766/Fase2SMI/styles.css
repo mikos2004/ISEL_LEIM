@@ -1,0 +1,41 @@
+/* Header */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.test {
+    width: 15px;
+}
+
+.header-content h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+}
+
+.back-button {
+    color: white;
+    text-decoration: none;
+    font-size: 1.4em;
+}
+
+
+/* Footer */
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+    margin-top: auto;
+    width: 100%;
+}

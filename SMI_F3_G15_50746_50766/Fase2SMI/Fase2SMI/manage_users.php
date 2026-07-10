@@ -1,0 +1,146 @@
+<?php
+session_start();
+require_once 'db.php';
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: login.php");
+    exit();
+}
+
+$conn = db_connect();
+$current_user_id = $_SESSION['user_id'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'], $_POST['role'])) {
+    $user_id = intval($_POST['user_id']);
+    $role = $_POST['role'];
+
+    // Verificar que o role é válido
+    $valid_roles = ['viewer', 'editor', 'admin'];
+    if (!in_array($role, $valid_roles)) {
+        echo json_encode(['success' => false, 'error' => 'Role inválido.']);
+        exit();
+    }
+
+    $stmt = $conn->prepare("UPDATE User SET role = ? WHERE id = ?");
+    $stmt->bind_param("si", $role, $user_id);
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Erro ao atualizar.']);
+    }
+    exit();
+}
+
+// Buscar todos os utilizadores, exceto o próprio
+$stmt = $conn->prepare("SELECT id, username, email, role FROM User WHERE id != ? ORDER BY username ASC");
+$stmt->bind_param("i", $current_user_id);
+$stmt->execute();
+$users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+?>
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerir Utilizadores - Wiki SMI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        select {
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            font-size: 14px;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Gestão de Utilizadores</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($users as $u): ?>
+            <tr data-user-id="<?= $u['id'] ?>">
+                <td><?= htmlspecialchars($u['username']) ?></td>
+                <td><?= htmlspecialchars($u['email']) ?></td>
+                <td>
+                    <select onchange="updateRole(this)" data-user-id="<?= $u['id'] ?>">
+                        <option value="viewer" <?= $u['role'] === 'viewer' ? 'selected' : '' ?>>viewer</option>
+                        <option value="editor" <?= $u['role'] === 'editor' ? 'selected' : '' ?>>editor</option>
+                        <option value="admin" <?= $u['role'] === 'admin' ? 'selected' : '' ?>>admin</option>
+                    </select>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<script>
+function updateRole(select) {
+    const userId = select.dataset.userId;
+    const newRole = select.value;
+
+    fetch("manage_users.php", {
+        method: "POST",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: `user_id=${userId}&role=${encodeURIComponent(newRole)}`
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (!data.success) {
+            alert("Erro: " + (data.error || 'Erro desconhecido.'));
+        }
+    })
+    .catch(() => {
+        alert("Erro de rede.");
+    });
+}
+</script>
+
+</body>
+</html>
