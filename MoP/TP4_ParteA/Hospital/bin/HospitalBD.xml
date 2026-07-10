@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sistemaBD [
+        <!ELEMENT sistemaBD (users,consultas)+>
+        <!ELEMENT users (admins,medicos,enfermeiros,doentes)+>
+        <!ELEMENT admins (admin)+>
+        <!ELEMENT admin (nome,idade,code,user,pass,categoria)+>
+        <!ELEMENT nome (#PCDATA)>
+        <!ELEMENT idade (#PCDATA)>
+        <!ELEMENT code (#PCDATA)>
+        <!ELEMENT user (#PCDATA)>
+        <!ELEMENT pass (#PCDATA)>
+        <!ELEMENT categoria (#PCDATA)>
+        <!ELEMENT medicos (medico)+>
+        <!ELEMENT medico (nome,idade,code,user,pass,especialidade,categoria)+>
+        <!ELEMENT especialidade (#PCDATA)>
+        <!ELEMENT enfermeiros (enfermeiro)+>
+        <!ELEMENT enfermeiro (nome,idade,code,user,pass,area,categoria)+>
+        <!ELEMENT area (#PCDATA)>
+        <!ELEMENT doentes (doente)+>
+        <!ELEMENT doente (nome,idade,code,user,pass,diagnostico,categoria)+>
+        <!ELEMENT diagnostico (#PCDATA)>
+        <!ELEMENT consultas (consulta)+>
+        <!ELEMENT consulta (descricao,data,hora,paciente,medicoC,code)+>
+        <!ELEMENT medicoC (#PCDATA)>
+        <!ELEMENT descricao (#PCDATA)>
+        <!ELEMENT data (#PCDATA)>
+        <!ELEMENT hora (#PCDATA)>
+        <!ELEMENT paciente (#PCDATA)>
+        ]>
+<sistemaBD>
+    <users>
+        <admins>
+            <admin>
+                <nome>Hugo Barros</nome>
+                <idade>30</idade>
+                <code>A50023</code>
+                <user>hbarros</user>
+                <pass>9UgJ4UqLKu</pass>
+                <categoria>admin</categoria>
+            </admin>
+            <admin>
+                <nome>Simão Silva</nome>
+                <idade>30</idade>
+                <code>A60231</code>
+                <user>ssilva</user>
+                <pass>9UgJ4UqLKu</pass>
+                <categoria>admin</categoria>
+            </admin>
+        </admins>
+        <medicos>
+            <medico>
+                <nome>Lia Miranda</nome>
+                <idade>47</idade>
+                <code>M28751</code>
+                <user>lmiranda</user>
+                <pass>9cBmjXnxqM</pass>
+                <especialidade>Cardiologia</especialidade>
+                <categoria>medico</categoria>
+            </medico>
+            <medico>
+                <nome>Vasco Ribeiro</nome>
+                <idade>40</idade>
+                <code>M42551</code>
+                <user>vribeiro</user>
+                <pass>Taradao1xqM</pass>
+                <especialidade>Neurologia</especialidade>
+                <categoria>medico</categoria>
+            </medico>
+            <medico>
+                <nome>Mateus Moedas</nome>
+                <idade>71</idade>
+                <code>M28761</code>
+                <user>mmoedas</user>
+                <pass>9ZduUntjLZ</pass>
+                <especialidade>Reumatologia</especialidade>
+                <categoria>medico</categoria>
+            </medico>
+            <medico>
+                <nome>Chiara Petrillo</nome>
+                <idade>28</idade>
+                <code>M13612</code>
+                <user>cpetrillo</user>
+                <pass>tMtVvQY8BP</pass>
+                <especialidade>Nutrição</especialidade>
+                <categoria>medico</categoria>
+            </medico>
+            <medico>
+                <nome>Alberto Campos</nome>
+                <idade>37</idade>
+                <code>M59671</code>
+                <user>acampos</user>
+                <pass>U58xKSVfJe</pass>
+                <especialidade>Infectologia</especialidade>
+                <categoria>medico</categoria>
+            </medico>
+        </medicos>
+        <enfermeiros>
+            <enfermeiro>
+                <nome>Paulo Azevedo</nome>
+                <idade>57</idade>
+                <code>E92767</code>
+                <user>pazevedo</user>
+                <pass>7qhUEKAGbd</pass>
+                <area>Urgências</area>
+                <categoria>enfermeiro</categoria>
+            </enfermeiro>
+            <enfermeiro>
+                <nome>Édgar Ramos</nome>
+                <idade>33</idade>
+                <code>E26167</code>
+                <user>eramos</user>
+                <pass>PgHqkC74bz</pass>
+                <area>Pediatria</area>
+                <categoria>enfermeiro</categoria>
+            </enfermeiro>
+        </enfermeiros>
+        <doentes>
+            <doente>
+                <nome>Madalena Cruz</nome>
+                <idade>50</idade>
+                <code>D50759</code>
+                <user>mcruz</user>
+                <pass>j7tCYJZ2v6</pass>
+                <diagnostico>Dor de Cabeça</diagnostico>
+                <categoria>doente</categoria>
+            </doente>
+            <doente>
+                <nome>João Silva</nome>
+                <idade>35</idade>
+                <code>D85214</code>
+                <user>jsilva</user>
+                <pass>zC9a6bX1dR</pass>
+                <diagnostico>Pneumonia</diagnostico>
+                <categoria>doente</categoria>
+            </doente>
+            <doente>
+                <nome>Maria Santos</nome>
+                <idade>42</idade>
+                <code>D96325</code>
+                <user>msantos</user>
+                <pass>pQ5fE2gH7s</pass>
+                <diagnostico>Asma</diagnostico>
+                <categoria>doente</categoria>
+            </doente>
+            <doente>
+                <nome>Carlos Ferreira</nome>
+                <idade>28</idade>
+                <code>D74123</code>
+                <user>cferreira</user>
+                <pass>tN3kW8mB4i</pass>
+                <diagnostico>Azia</diagnostico>
+                <categoria>doente</categoria>
+            </doente>
+        </doentes>
+    </users>
+    <consultas>
+        <consulta>
+            <descricao>Exames aos intestinos</descricao>
+            <data>1/12/2023</data>
+            <hora>14:30</hora>
+            <paciente>Carlos Ferreira</paciente>
+            <medicoC>Chiara Petrillo</medicoC>
+            <code>C69852</code>
+        </consulta>
+    </consultas>
+</sistemaBD>
