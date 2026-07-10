@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "186009588922",
+    "firebase_url": "https://dam50746tp4-default-rtdb.firebaseio.com",
+    "project_id": "dam50746tp4",
+    "storage_bucket": "dam50746tp4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186009588922:android:eb73cf4fd40a9d2ef5de83",
+        "android_client_info": {
+          "package_name": "com.google.firebase.codelab.friendlychat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "KEY_HERE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186009588922:android:1666b4eb44158afff5de83",
+        "android_client_info": {
+          "package_name": "com.notes.notesproxmlviews"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf9g_-vLmjrTb5jRUwf7hnj2oH9Jn60TM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186009588922:android:ef47df03154748ecf5de83",
+        "android_client_info": {
+          "package_name": "dam.a50746.disneyjournal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "KEY_HERE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
