@@ -1,0 +1,113 @@
+char tipo_onda;
+
+void setup() 
+{
+  Serial.begin(9600);
+}
+void readchar()
+{
+  static const int WAIT = 0, READ =1;
+  static int state = WAIT;
+  static char aux;
+  switch (state)
+  {
+  	case WAIT:
+    if(Serial.available()>0){
+      aux = Serial.read();
+      state = READ;
+    }
+    break;
+    case READ:
+    if(aux=='s'||aux=='q'||aux=='t')
+    {
+      tipo_onda=aux;
+      state=WAIT;
+    }
+    break;
+  }
+}
+
+void  gerador(int rate, int periodo, char tipoOnda){
+  static const int WAIT=0, CHOICE=1, HARMONIC=2, SQUARE=3, TRIANGLE=4;
+  static unsigned long t0=millis();
+  static int state = WAIT;
+  int T=periodo;
+  rate = 1000/rate;
+  //param p/ sinusoidal:
+  float ydc=2.5, yac=2.5;//delimitando que o max = 5 e min = 0 
+  float onda=0;
+  int Tst=1000*T/2; //semiperiodo em ms (p/ quadrada e triangular)
+  float ymin=0.0,ymax=5.0; //quadrada e triangular
+  unsigned long tmin, tmax;
+  
+  float ystart,yend;//y value at start/end of semicycle
+  float mapyscale=100;
+  
+  switch (state)
+  {
+    case WAIT:
+    if(millis()-t0>rate)
+    {
+      t0=millis();
+      state=CHOICE;
+    }
+    break;
+    case CHOICE:
+    	if(tipo_onda == 's')
+        {
+          state=HARMONIC;
+        }
+    	if(tipo_onda == 'q')
+        {
+          state=SQUARE;
+        }
+    	if(tipo_onda == 't')
+        {
+          state=TRIANGLE;
+        }
+    break;
+  	case HARMONIC:
+        t0=millis();
+  		onda = ydc+yac*sin(6.28*t0/1000/T);
+  		Serial.println(onda);
+  		if(tipo_onda != 's')
+        {
+          state=WAIT;
+        }
+  	break;
+    case SQUARE: //ymin=0.0,ymax=5.0;; Tst=1000*T/2;
+    	t0=millis();
+        if((t0/Tst)%2==0) Serial.println(ymin);
+  		else Serial.println(ymax);
+    	if(tipo_onda != 'q')
+        {
+          state=WAIT;
+        }
+    	break;
+    case TRIANGLE:////ymin=0.0,ymax=5.0;; Tst=1000*T/2;
+  		tmin=t0/Tst*Tst;   //start time of each semicycle
+  		tmax=tmin+Tst;	//end time of each semicycle
+  		if((tmin/Tst)%2==0)
+  		{
+    		ystart=ymin;
+    		yend=ymax;
+  		}else{	
+    	ystart=ymax;
+    	yend=ymin;
+  		}
+    	t0=millis();
+  		onda= map(t0,tmin,tmax,mapyscale*ystart,mapyscale*yend)/mapyscale;
+    	Serial.println(onda);
+    	if(tipo_onda != 't')
+        {
+          state=WAIT;
+        }
+    	break;
+}
+}
+
+void loop() 
+{
+  gerador( 10, 5, tipo_onda);
+  readchar();
+}

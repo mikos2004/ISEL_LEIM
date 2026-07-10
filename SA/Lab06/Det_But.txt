@@ -1,0 +1,39 @@
+#define S1 2
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(S1, INPUT_PULLUP);
+}
+
+void loop() 
+{
+  toque(S1);
+}
+
+void toque(int pinBotao)
+{
+  const int PENDING = 0, SCANNING = 1, PRINTING=2;
+  static int state = PENDING;
+  static bool b;
+  switch (state)
+  {
+    case PENDING:
+      b = digitalRead(pinBotao);
+      if(b == LOW)
+      {
+        state = SCANNING;
+      }
+    break;
+    case SCANNING:
+      b = digitalRead(pinBotao);
+      if( b == HIGH)
+      {
+        state = PRINTING;
+      }
+    break;
+    case PRINTING:
+        Serial.println("Detetado toque no botão");
+        state = PENDING;
+    break;
+  }
+}
