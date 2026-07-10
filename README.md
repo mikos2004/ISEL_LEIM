@@ -1,4 +1,4 @@
-# ISEL_LEIM - Repositório Central
+# ISEL_LEIM - Trabalhos
 
 ##  Descrição
 
